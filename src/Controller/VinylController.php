@@ -19,11 +19,14 @@ class VinylController extends AbstractController
         ['song' =>'On Bended Knee' , 'artist' => 'Boyz II Men'],
         ['song' =>'Fantasy' , 'artist' => 'Mariah Carey']
     ];
+    
+    
 
 
     #[Route('/')]
     public function homepage() : Response 
     {
+        dd($this->tracks);
        //return new Response("Title: PB and Jams");
         return $this->render('vinyl/homepage.html.twig', [
             'title' => 'PB & Jams',
