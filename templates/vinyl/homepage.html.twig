@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<h1>{{ title }}</h1>
+
+{# This is how you put a comment in Twig #}
+
+
+<div>
+{# This is how you do a for loop in twig #}
+    Tracks:
+
+    <ul>
+        {% for track in tracks %} 
+            <li>
+                {{ track.song }} - {{ track.artist|upper }}
+            </li>
+        {% endfor %}      
+    </ul>
+
+</div>
+{% endblock %}
