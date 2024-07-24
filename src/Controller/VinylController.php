@@ -7,6 +7,7 @@ use LDAP\Result;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function \symfony\component\string\u;
 
 class VinylController extends AbstractController
 {
@@ -23,7 +24,7 @@ class VinylController extends AbstractController
     
 
 
-    #[Route('/')]
+    #[Route('/', name: "app_homepage")]
     public function homepage() : Response 
     {
         //dd($this->tracks); //dd stands for dump and die
@@ -34,16 +35,15 @@ class VinylController extends AbstractController
         ]);
     }
 
-    #[Route('/browse/{musicCategory}')]
+    #[Route('/browse/{musicCategory}', name: "app_browse")]
     public function browse(string $musicCategory = null /*this makes the url extention optional*/): Response 
     {
-        if ($musicCategory) {
-        //return new Response('Breakup vinyl? Angsty 90s rock? Browse the collection!');
-        $title = str_replace('-', ' ', $musicCategory);
-        }else{
-            $title = 'All Genres';
-        }
+        
+        // the u() function creates Unicode strings
+        $genre = $musicCategory ? u(str_replace('-', ' ', $musicCategory))->title(true) : null;
 
-        return new Response('Genre: '.$title);
+        return $this->render("vinyl/browse.html.twig", [
+            'genre' => $genre,
+        ]);
     }
 }
