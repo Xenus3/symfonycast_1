@@ -26,7 +26,7 @@ class VinylController extends AbstractController
     #[Route('/')]
     public function homepage() : Response 
     {
-        dd($this->tracks);
+        //dd($this->tracks); //dd stands for dump and die
        //return new Response("Title: PB and Jams");
         return $this->render('vinyl/homepage.html.twig', [
             'title' => 'PB & Jams',
